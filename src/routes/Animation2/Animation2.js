@@ -1,53 +1,68 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
 import "./Animation2.css";
 
 import { gsap } from "gsap";
 import { Power3 } from "gsap";
 
 function Animation2() {
+  let app = useRef(null);
   let circleYellow = useRef(null);
   let circleRed = useRef(null);
   let circleBlue = useRef(null);
 
-  useEffect(() => {
-    gsap.from(circleYellow, {
-      opacity: 0,
-      x: 40,
+  const [state, setState] = useState(false);
+
+  const handleExpand = () => {
+    gsap.to(circleRed.current, {
+      width: 200,
+      height: 200,
       duration: 0.8,
       ease: Power3.easeOut,
     });
-    gsap.from(circleRed, {
-      opacity: 0,
-      x: 40,
+    setState(true);
+  };
+
+  const handleShrink = () => {
+    gsap.to(circleRed.current, {
+      width: 75,
+      height: 75,
       duration: 0.8,
       ease: Power3.easeOut,
-      delay: 0.2,
     });
-    gsap.from(circleBlue, {
-      opacity: 0,
-      x: 40,
-      duration: 0.8,
-      ease: Power3.easeOut,
-      delay: 0.4,
-    });
-  }, []);
+    setState(false);
+  };
+
+  useGSAP(
+    () => {
+      gsap.to(app.current, {
+        css: { visibility: "visible" },
+      });
+      gsap.from([circleYellow.current, circleRed.current, circleBlue.current], {
+        opacity: 0,
+        x: 40,
+        duration: 0.8,
+        ease: Power3.easeOut,
+        stagger: {
+          amount: 0.2,
+          from: "start",
+        },
+      });
+    },
+    { dependencies: [] }
+  );
 
   return (
-    <div className="App">
+    <div ref={app} className="App">
       <header className="App-header">
-        <div className="Circle-container    ">
+        <div className="Circle-container">
+          <div ref={circleYellow} className="circle circle-yellow"></div>
           <div
-            ref={(element) => (circleYellow = element)}
-            className="circle circle-yellow"
-          ></div>
-          <div
-            ref={(element) => (circleRed = element)}
+            onClick={state ? handleShrink : handleExpand}
+            ref={circleRed}
             className="circle circle-red"
           ></div>
-          <div
-            ref={(element) => (circleBlue = element)}
-            className="circle circle-blue"
-          ></div>
+          <div ref={circleBlue} className="circle circle-blue"></div>
         </div>
       </header>
     </div>
