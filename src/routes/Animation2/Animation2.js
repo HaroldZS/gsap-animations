@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import "./Animation2.css";
+import "./Animation2.scss";
 
 import { gsap } from "gsap";
 import { Power3 } from "gsap";
@@ -53,8 +53,8 @@ function Animation2() {
   );
 
   return (
-    <div ref={app} className="App">
-      <header className="App-header">
+    <div ref={app} className="A2-container">
+      <header>
         <div className="Circle-container">
           <div ref={circleYellow} className="circle circle-yellow"></div>
           <div

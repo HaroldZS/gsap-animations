@@ -1,7 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import logo from "../../logo.svg";
-import "./Animation1.css";
-
+import "./Animation1.scss";
 import { gsap } from "gsap";
 import { Power3 } from "gsap";
 
@@ -39,19 +38,19 @@ function Animation1() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="A1-container">
+      <header>
         <img
           ref={(element) => (logoItem = element)}
           src={logo}
-          className="App-logo"
+          className="A1-logo"
           alt="logo"
         />
         <p ref={textItem}>
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
-          className="App-link"
+          className="App1-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"

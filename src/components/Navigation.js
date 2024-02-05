@@ -17,6 +17,9 @@ function Navigation() {
           <li>
             <Link to="/animation3">Animation 3</Link>
           </li>
+          <li>
+            <Link to="/animation4">Animation 4</Link>
+          </li>
         </ul>
       </nav>
     );

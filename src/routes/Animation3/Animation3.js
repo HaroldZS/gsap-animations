@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
-import "./Animation3.css";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import "./Animation3.scss";
 
 function Animation3() {
   const box1 = useRef(null);
@@ -48,8 +48,8 @@ function Animation3() {
   );
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="A3-container">
+      <header>
         <div ref={box1} className="box box-green"></div>
         <div ref={box2} className="box box-green"></div>
         <div ref={box3} className="box box-green"></div>
