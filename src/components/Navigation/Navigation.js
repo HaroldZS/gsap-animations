@@ -34,6 +34,11 @@ function Navigation() {
             <div className="nav-circle">4</div>
           </Link>
         </li>
+        <li>
+          <Link to="/animation5" className="nav-link">
+            <div className="nav-circle">5</div>
+          </Link>
+        </li>
       </ul>
     </nav>
   );
