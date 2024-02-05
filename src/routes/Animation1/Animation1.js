@@ -1,51 +1,38 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import logo from "../../logo.svg";
 import "./Animation1.scss";
 import { gsap } from "gsap";
 import { Power3 } from "gsap";
+import { useGSAP } from "@gsap/react";
 
 function Animation1() {
   let logoItem = useRef(null);
   let textItem = useRef(null);
 
-  useEffect(() => {
-    let text = textItem.current;
-    const imgObj = { opacity: 0, y: 20 };
-    const textObj = { opacity: 0, y: 20 };
+  const styles = {
+    duration: 1.8,
+    opacity: 0,
+    y: -20,
+    ease: Power3.easeOut,
+  };
 
-    gsap.to(imgObj, {
-      duration: 1.8,
-      opacity: 1,
-      y: 0,
-      ease: Power3.easeOut,
-      onUpdate: () => {
-        logoItem.style.opacity = imgObj.opacity;
-        logoItem.style.transform = `translateY(${imgObj.y}px)`;
-      },
-    });
+  useGSAP(
+    () => {
+      gsap.from(logoItem.current, styles);
 
-    gsap.to(textObj, {
-      duration: 1.8,
-      opacity: 1,
-      y: 0,
-      ease: Power3.easeOut,
-      delay: 0.2,
-      onUpdate: () => {
-        text.style.opacity = textObj.opacity;
-        text.style.transform = `translateY(${textObj.y}px)`;
-      },
-    });
-  }, []);
+      gsap.from(textItem.current, {
+        ...styles,
+        y: 20,
+        delay: 0.2,
+      });
+    },
+    { dependencies: [] }
+  );
 
   return (
     <div className="A1-container">
       <header>
-        <img
-          ref={(element) => (logoItem = element)}
-          src={logo}
-          className="A1-logo"
-          alt="logo"
-        />
+        <img ref={logoItem} src={logo} className="A1-logo" alt="logo" />
         <p ref={textItem}>
           Edit <code>src/App.js</code> and save to reload.
         </p>
